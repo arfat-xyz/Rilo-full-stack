@@ -4,7 +4,7 @@ import SingleCardComponent from "../products/single-card-component";
 import { Product } from "@prisma/client";
 import { getProducts } from "@/actions/products";
 
-const ITEMS_PER_PAGE = 3; // Number of products per page
+const ITEMS_PER_PAGE = 8; // Number of products per page
 
 const ProductClientComponent = () => {
   const [products, setProducts] = useState<Product[]>([]);

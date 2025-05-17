@@ -44,6 +44,7 @@ const DashboardClientComponent = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">All Products</h1>
+        <CreateProductForm onSuccess={init} />
         {data?.user?.role === Role.ADMIN ? (
           <button
             type="button"
@@ -69,6 +70,7 @@ const DashboardClientComponent = () => {
                 key={product.id}
                 product={product}
                 onSuccess={init}
+                isItDashboard={true}
               />
             ))}
           </div>
@@ -100,7 +102,6 @@ const DashboardClientComponent = () => {
                     </button>
                   )
                 )}
-                <CreateProductForm onSuccess={init} />
                 <button
                   onClick={() =>
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))

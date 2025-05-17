@@ -7,10 +7,11 @@ interface ProductModalStore {
 
 const useProductModal = create<ProductModalStore>((set) => ({
   isCreateProductModalOpen: false,
-  toggleCreateProductModal: () =>
-    set((state) => ({
+  toggleCreateProductModal: () => {
+    return set((state) => ({
       isCreateProductModalOpen: !state.isCreateProductModalOpen,
-    })),
+    }));
+  },
 }));
 
 export default useProductModal;

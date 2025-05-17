@@ -44,6 +44,35 @@ export async function createProduct(
   revalidateTag(PRODUCTS_TAG);
   return createProduct;
 }
+export async function deleteProduct(id: string) {
+  const data = await auth();
+  if (data?.user?.role !== Role.ADMIN) {
+    throw new Error("You're not authorized");
+  }
+
+  const existingProduct = await db.product.findUnique({
+    where: { id },
+  });
+
+  if (!existingProduct) {
+    throw new Error("Product not found");
+  }
+
+  // Optional: If cascade doesn't work, remove related comments manually
+  await db.comment.deleteMany({
+    where: { productId: id },
+  });
+
+  const deletedProdcut = await db.product.delete({
+    where: { id },
+  });
+
+  revalidatePath("/dashboard");
+  revalidateTag(PRODUCTS_TAG);
+
+  return { success: true, deletedProdcut };
+}
+
 export async function updateProduct(
   formData: Pick<
     Product,

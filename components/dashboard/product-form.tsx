@@ -42,13 +42,11 @@ const CreateProductForm = ({
   } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema) as Resolver<ProductFormValues>,
     defaultValues: {
-      name: "arfat",
-      description: "asdfasdfasdfasdf",
-      price: 66,
-      images: [
-        "https://m.media-amazon.com/images/I/71UnL+fUeWL._AC_SL1500_.jpg",
-      ],
-      stock: 55,
+      name: "",
+      description: "",
+      price: 0,
+      images: [""],
+      stock: 0,
     },
   });
 
@@ -86,7 +84,7 @@ const CreateProductForm = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isCreateProductModalOpen, toggleCreateProductModal]);
-
+  console.log({ isCreateProductModalOpen });
   if (!isCreateProductModalOpen) return null;
 
   return (
